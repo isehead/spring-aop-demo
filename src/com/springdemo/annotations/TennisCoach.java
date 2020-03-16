@@ -9,4 +9,5 @@ public class TennisCoach implements Coach {
     public String getDailyWorkout() {
         return ("Practice with the wall");
     }
+
 }
