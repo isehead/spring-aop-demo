@@ -21,7 +21,5 @@ public class RandomFortuneService implements FortuneService {
         String theFortune = fortunesArray[index];
 
         return theFortune;
-
-        // pick a random fortune
     }
 }
