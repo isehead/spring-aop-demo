@@ -1,3 +1,4 @@
+/*
 package com.springdemo.annotations;
 
 import org.springframework.stereotype.Component;
@@ -51,3 +52,4 @@ public class FileFortuneService implements FortuneService {
         return theFortunes.get(index);
     }
 }
+*/
