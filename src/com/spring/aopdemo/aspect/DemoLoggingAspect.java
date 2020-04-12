@@ -13,17 +13,33 @@ public class DemoLoggingAspect {
 
     // start with @Before advice testing
 
-    @Pointcut("execution(* com.spring.aopdemo.dao.*.*(..))")
-    private void forDaoPackage(){}
+    // pointcut for getters
+    @Pointcut("execution(* com.spring.aopdemo.dao.*.get*(..))")
+    private void getter() {
+    }
 
-//    @Before("execution(public void add*())")
-    @Before("forDaoPackage()")
-    public void beforeAddAccountAdvice(){
+    // pointcut for setters
+    @Pointcut("execution(* com.spring.aopdemo.dao.*.set*(..))")
+    private void setter() {
+    }
+
+    // pointcut for the package - include everything except getters and setters
+    @Pointcut("forDaoPackage() && !(getter() || setter())")
+    private void forDaoNoGettersNoSetters() {
+    }
+
+    @Pointcut("execution(* com.spring.aopdemo.dao.*.*(..))")
+    private void forDaoPackage() {
+    }
+
+    //    @Before("execution(public void add*())")
+    @Before("forDaoNoGettersNoSetters()")
+    public void beforeAddAccountAdvice() {
         System.out.println("\n=====>>> Executing @Before advice on addAccount()");
     }
 
-    @Before("forDaoPackage()")
-    public void performApiAnalytics(){
+    @Before("forDaoNoGettersNoSetters()")
+    public void performApiAnalytics() {
         System.out.println("========= API ANALYTICS =========");
     }
 }

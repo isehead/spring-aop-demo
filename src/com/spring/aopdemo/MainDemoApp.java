@@ -20,8 +20,14 @@ public class MainDemoApp {
         accountDAO.addAccount(account,false);
         membershipDAO.addMember();
 
+        // call the accountDAO getters and setters
+        accountDAO.setName("testName");
+        accountDAO.setServiceCode("123");
+        accountDAO.getName();
+        accountDAO.getServiceCode();
+
         // call the business method again
-        System.out.println("\nCalling an aspect again\n");
+        System.out.println("\nCalling an aspect again");
         accountDAO.addAccount(account,true);
         membershipDAO.addMember();
         accountDAO.doSmth();
