@@ -16,13 +16,15 @@ public class MainDemoApp {
         AccountDAO accountDAO = applicationContext.getBean("accountDAO", AccountDAO.class);
 
         // call the business method
-        accountDAO.addAccount();
+        Account account = new Account();
+        accountDAO.addAccount(account,false);
         membershipDAO.addMember();
 
         // call the business method again
         System.out.println("\nCalling an aspect again\n");
-        accountDAO.addAccount();
+        accountDAO.addAccount(account,true);
         membershipDAO.addMember();
+        accountDAO.doSmth();
 
         // close the context
         applicationContext.close();
