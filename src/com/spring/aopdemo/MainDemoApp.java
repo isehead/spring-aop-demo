@@ -1,6 +1,7 @@
 package com.spring.aopdemo;
 
 import com.spring.aopdemo.dao.AccountDAO;
+import com.spring.aopdemo.dao.MembershipDAO;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class MainDemoApp {
@@ -11,10 +12,17 @@ public class MainDemoApp {
                 new AnnotationConfigApplicationContext(DemoConfig.class);
 
         // get the bean from spring container
+        MembershipDAO membershipDAO = applicationContext.getBean("membershipDAO", MembershipDAO.class);
         AccountDAO accountDAO = applicationContext.getBean("accountDAO", AccountDAO.class);
 
         // call the business method
         accountDAO.addAccount();
+        membershipDAO.addMember();
+
+        // call the business method again
+        System.out.println("\nCalling an aspect again\n");
+        accountDAO.addAccount();
+        membershipDAO.addMember();
 
         // close the context
         applicationContext.close();
