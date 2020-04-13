@@ -12,6 +12,9 @@ public class Account {
         this.level = level;
     }
 
+    public Account() {
+    }
+
     public String getName() {
         return name;
     }
