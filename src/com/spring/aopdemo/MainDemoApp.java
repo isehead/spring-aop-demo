@@ -16,11 +16,13 @@ public class MainDemoApp {
         AccountDAO accountDAO = applicationContext.getBean("accountDAO", AccountDAO.class);
 
         // call the business method
+        System.out.println("Call new account/add account/membershipDAO addMember");
         Account account = new Account();
         accountDAO.addAccount(account,false);
         membershipDAO.addMember();
 
         // call the accountDAO getters and setters
+        System.out.println("Call the accountDAO getters and setters");
         accountDAO.setName("testName");
         accountDAO.setServiceCode("123");
         accountDAO.getName();

@@ -14,7 +14,7 @@ public class AccountDAO {
     }
 
     public void doSmth(){
-        System.out.println("Do something method");
+        System.out.println("AccountDAO do something method");
     }
 
     public String getName() {
