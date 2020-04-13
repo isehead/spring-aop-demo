@@ -18,6 +18,9 @@ public class MainDemoApp {
         // call the business method
         System.out.println("Call new account/add account/membershipDAO addMember");
         Account account = new Account();
+        account.setName("John");
+        account.setLevel("Connor");
+        System.out.println("Before accountDAO.addAccount");
         accountDAO.addAccount(account,false);
         membershipDAO.addMember();
 
