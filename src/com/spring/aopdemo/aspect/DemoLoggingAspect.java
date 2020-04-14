@@ -9,18 +9,21 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Aspect
 @Component
 @Order(2)
 public class DemoLoggingAspect {
 
+    private Logger logger = Logger.getLogger(getClass().getName());
+
     @Around("execution(* com.spring.aopdemo.service.*.getFortune(..))")
     public Object aroundGetFortune(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 
         // print the method we advise on
         String method = proceedingJoinPoint.getSignature().toShortString();
-        System.out.println("Executing @Around on method: " + method);
+        logger.info("Executing @Around on method: " + method);
 
         // begin timestamp
         long beginCount = System.currentTimeMillis();
@@ -33,7 +36,7 @@ public class DemoLoggingAspect {
 
         // calculate duration
         long duration = endCount - beginCount;
-        System.out.println("Duration is: " + duration / 1000.0 + " seconds");
+        logger.info("Duration is: " + duration / 1000.0 + " seconds");
 
         return result;
     }
@@ -43,7 +46,7 @@ public class DemoLoggingAspect {
 
         // print the method we advise on
         String method = joinPoint.getSignature().toShortString();
-        System.out.println("Executing @AfterFINALLY on method: " + method);
+        logger.info("Executing @AfterFINALLY on method: " + method);
     }
 
     @AfterThrowing(pointcut = "execution(* com.spring.aopdemo.dao.AccountDAO.findAccounts(..))", throwing = "theExc")
@@ -51,10 +54,10 @@ public class DemoLoggingAspect {
 
         // print the method we advise on
         String method = joinPoint.getSignature().toShortString();
-        System.out.println("Executing @AfterThrowing on method: " + method);
+        logger.info("Executing @AfterThrowing on method: " + method);
 
         // log the exception
-        System.out.println("The exception is: " + theExc);
+        logger.info("The exception is: " + theExc);
     }
 
     // add a new advice for @AfterReturning on the findAccounts() method
@@ -63,14 +66,14 @@ public class DemoLoggingAspect {
 
         // print out which method we are advising on
         String method = joinPoint.getSignature().toShortString();
-        System.out.println("Executing @AfterReturning on method: " + method);
+        logger.info("Executing @AfterReturning on method: " + method);
 
         // print out the results of the method call
-        System.out.println("Result is: " + result);
+        logger.info("Result is: " + result);
 
         // post-process and modify the data
         convertToUpperCase(result);
-        System.out.println("Result is: " + result);
+        logger.info("Result is: " + result);
     }
 
     private void convertToUpperCase(List<Account> result) {
@@ -82,11 +85,11 @@ public class DemoLoggingAspect {
     //    @Before("execution(public void add*())")
     @Before("com.spring.aopdemo.aspect.AopExpressions.forDaoNoGettersNoSetters()")
     public void beforeAddAccountAdvice(JoinPoint joinPoint) {
-        System.out.println("=====>>> Executing @Before advice on addAccount()");
+        logger.info("=====>>> Executing @Before advice on addAccount()");
 
         // display the method signature
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-        System.out.println("Method signature is: " + methodSignature);
+        logger.info("Method signature is: " + methodSignature);
 
         //display method arguments
         Object[] args = joinPoint.getArgs();
@@ -95,7 +98,7 @@ public class DemoLoggingAspect {
             if (tempArg instanceof Account) {
                 // downcast and print Account-specific stuff
                 Account account = (Account) tempArg;
-                System.out.println(account);
+                logger.info(account.toString());
             }
         }
     }
