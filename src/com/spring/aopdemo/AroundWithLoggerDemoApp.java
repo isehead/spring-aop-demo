@@ -18,10 +18,10 @@ public class AroundWithLoggerDemoApp {
         TrafficFortuneService trafficFortuneService =
                 applicationContext.getBean("trafficFortuneService", TrafficFortuneService.class);
 
-        logger.info("MAIN program: @Around demo app, calling getFortune()...");
+        logger.info("===== MAIN program =====: @Around demo app, calling getFortune()...");
         String data = trafficFortuneService.getFortune();
 
-        logger.info("The fortune is: " + data);
+        logger.info("=== MAIN === The fortune is: " + data);
 
         // close the context
         applicationContext.close();

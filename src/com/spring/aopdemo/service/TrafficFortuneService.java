@@ -17,6 +17,6 @@ public class TrafficFortuneService {
         }
 
         // return a fortune
-        return "Sample return string";
+        return "=== Class fortune === Sample return string";
     }
 }

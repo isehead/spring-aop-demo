@@ -23,7 +23,7 @@ public class DemoLoggingAspect {
 
         // print the method we advise on
         String method = proceedingJoinPoint.getSignature().toShortString();
-        logger.info("Executing @Around on method: " + method);
+        logger.info("=== Aspect === Executing @Around on method: " + method);
 
         // begin timestamp
         long beginCount = System.currentTimeMillis();
@@ -36,9 +36,14 @@ public class DemoLoggingAspect {
 
         // calculate duration
         long duration = endCount - beginCount;
-        logger.info("Duration is: " + duration / 1000.0 + " seconds");
+        logger.info("=== Aspect === Duration is: " + duration / 1000.0 + " seconds");
 
         return result;
+    }
+
+    @Around("execution(* com.spring.aopdemo.service.*.getFortune(..))")
+    public void aroundGetFortune2() throws Throwable {
+        System.out.println("My custom log message @Around");
     }
 
     @After("execution(* com.spring.aopdemo.dao.AccountDAO.findAccounts(..))")
