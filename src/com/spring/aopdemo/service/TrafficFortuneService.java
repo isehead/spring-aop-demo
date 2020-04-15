@@ -19,4 +19,12 @@ public class TrafficFortuneService {
         // return a fortune
         return "=== Class fortune === Sample return string";
     }
+
+    public String getFortune(boolean tripWire) {
+
+        if (tripWire){
+            throw new RuntimeException("Major accident");
+        }
+        return getFortune();
+    }
 }

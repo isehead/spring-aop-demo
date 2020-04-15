@@ -29,7 +29,16 @@ public class DemoLoggingAspect {
         long beginCount = System.currentTimeMillis();
 
         // execute the method
-        Object result = proceedingJoinPoint.proceed();
+        Object result = null;
+        try {
+            result =  proceedingJoinPoint.proceed();
+        } catch (Exception e) {
+            // log the exception
+            logger.warning(e.getMessage());
+
+            // give user a custome message
+            System.out.println("==========> AOP handling the exception");
+        }
 
         // get the second timestamp
         long endCount = System.currentTimeMillis();
@@ -39,11 +48,6 @@ public class DemoLoggingAspect {
         logger.info("=== Aspect === Duration is: " + duration / 1000.0 + " seconds");
 
         return result;
-    }
-
-    @Around("execution(* com.spring.aopdemo.service.*.getFortune(..))")
-    public void aroundGetFortune2() throws Throwable {
-        System.out.println("My custom log message @Around");
     }
 
     @After("execution(* com.spring.aopdemo.dao.AccountDAO.findAccounts(..))")
