@@ -31,12 +31,13 @@ public class DemoLoggingAspect {
         // execute the method
         Object result = null;
         try {
-            result =  proceedingJoinPoint.proceed();
+            result = proceedingJoinPoint.proceed();
         } catch (Exception e) {
-            // log the exception
+            // log or re-throw the exception
             logger.warning(e.getMessage());
+//            throw e;
 
-            // give user a custome message
+            // give user a custom message
             System.out.println("==========> AOP handling the exception");
         }
 
